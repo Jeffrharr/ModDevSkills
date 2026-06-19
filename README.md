@@ -25,6 +25,7 @@ ln -s ~/.rimworld-mod-skills/.claude/commands ~/.claude/commands/rimworld
 | Command | Description |
 |---|---|
 | `/setup-mod-project` | Scaffold a new mod or retrofit an existing one: directory layout, About.xml, csproj, cross-platform build scripts, symlink |
+| `/setup-linting` | Add C# linting: prompts for analyzer choice (StyleCop, Roslynator, both, or built-in only), .editorconfig, dotnet format CI step |
 | `/setup-mod-ci` | Set up pre-commit hook, GitHub repo, and GitHub Actions for a mod |
 
 ## Contributing
