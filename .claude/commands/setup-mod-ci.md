@@ -199,15 +199,37 @@ git commit -m "Add CI and Steam Workshop publish workflows"
 git push
 ```
 
-### 8. Finish
+### 8. Protect the default branch
+
+Block direct pushes to `master` (or `main`) so all changes must go through a PR.
+This prevents accidental commits directly to the default branch — including from
+Claude itself.
+
+```bash
+gh api repos/<owner>/<repo>/branches/master/protection \
+  --method PUT \
+  --field required_status_checks=null \
+  --field enforce_admins=true \
+  --field required_pull_request_reviews=null \
+  --field restrictions=null \
+  --field allow_force_pushes=false \
+  --field allow_deletions=false
+```
+
+Replace `master` with `main` if that is the default branch name. The
+`enforce_admins: true` flag ensures the rule applies to the repo owner too —
+without it, owners can still push directly.
+
+### 9. Finish
 
 Tell the user:
 
 1. **CI is live** — the build+test workflow will run on the next push
-2. **Three secrets needed** before the publish workflow will work:
+2. **Master is protected** — all changes now require a PR; direct pushes are blocked
+3. **Three secrets needed** before the publish workflow will work:
    - `STEAM_USERNAME` and `STEAM_PASSWORD` for the publisher Steam account
    - `STEAM_CONFIG_VDF`: run `steamcmd +login <username> +quit` locally, then
      `base64 -w0 ~/Steam/config/config.vdf` and paste the output as the secret
-3. **First Workshop upload must be done manually** in-game (dev mode → Mods →
+4. **First Workshop upload must be done manually** in-game (dev mode → Mods →
    Upload). After that, update `publishedfileid` in `workshop.vdf.template` and
    commit so future CI runs update the same listing.
