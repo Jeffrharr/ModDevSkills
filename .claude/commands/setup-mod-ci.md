@@ -45,7 +45,13 @@ CHECKER="/home/deck/Developer/RimWorldMods/HarmonyConflictChecker/CLI/bin/Releas
 
 # Lint the mod for patch quality issues
 /home/deck/.dotnet/dotnet "$CHECKER" lint "$REPO_ROOT"
+
+# API compatibility tests — verify patched RimWorld methods still exist.
+# Skipped automatically if Assembly-CSharp.dll is not found (see RIMWORLD_ASSEMBLY).
+"$REPO_ROOT/test.sh"
 ```
+
+If the mod has no test project yet, omit the `test.sh` line and note this to the user.
 
 Dry-run the hook from the repo root to confirm it passes before continuing.
 
