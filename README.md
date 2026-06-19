@@ -24,6 +24,7 @@ ln -s ~/.rimworld-mod-skills/.claude/commands ~/.claude/commands/rimworld
 
 | Command | Description |
 |---|---|
+| `/setup-mod-project` | Scaffold a new mod or retrofit an existing one: directory layout, About.xml, csproj, cross-platform build scripts, symlink |
 | `/setup-mod-ci` | Set up pre-commit hook, GitHub repo, and GitHub Actions for a mod |
 
 ## Contributing
